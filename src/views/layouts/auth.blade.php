@@ -6,24 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{asset('images/favicon.png')}}">
+    <link rel="icon" href="@yield('favicon')">
 
     <title>@yield('title')</title>
 
+@stack('head')
+
     <!-- Bootstrap 4.0-->
-    <link rel="stylesheet" href="{{asset('assets/vendor_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/plugins/bootstrap/dist/css/bootstrap.css')}}">
 
     <!-- Bootstrap extend-->
-    <link rel="stylesheet" href="{{asset('css/bootstrap-extend.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/bootstrap-extend.css')}}">
 
     <!-- Font Yekan -->
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-yekan/css/fontiran.css')}}"/>
+    <link rel="stylesheet" href="{{asset('ap/plugins/font-yekan/css/fontiran.css')}}" type="text/css"/>
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('css/master_style.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/master_style.css')}}">
 
     <!-- Superieur Admin skins -->
-    <link rel="stylesheet" href="{{asset('css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/skins/_all-skins.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +33,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    @stack('head')
 </head>
 <body class="hold-transition bg-img rtl" style="background-image: url({{asset('images/gallery/full/splash.jpg')}})"
       data-overlay="4">
@@ -42,8 +43,8 @@
             <div class="row no-gutters justify-content-md-center">
                 <div class="col-lg-4 col-md-5 col-12">
                     <div class="content-top-agile h-p100">
-                        <h2>پخش کوثر</h2>
-                        <p class="text-white">ورود به پنل مدیریت</p>
+                        <h2>@yield('header')</h2>
+                        <p class="text-white">@yield('desc')</p>
 
                         {{--<div class="text-center text-white">
                             <p class="mt-20">- Sign With -</p>
@@ -117,13 +118,10 @@
 
 
 <!-- jQuery 3 -->
-<script src="{{asset('assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
-
-<!-- popper -->
-<script src="{{asset('assets/vendor_components/popper/dist/popper.min.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
 
 <!-- Bootstrap 4.0-->
-<script src="{{asset('assets/vendor_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('ap/plugins/bootstrap/dist/js/bootstrap.js')}}"></script>
 
 </body>
 </html>

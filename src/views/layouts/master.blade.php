@@ -6,41 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{asset('images/favicon.png')}}">
+    <link rel="icon" href="@yield('favicon')">
 
     <title>@yield('title')</title>
 
 @stack('head')
 
-<!-- Bootstrap 4.0-->
-    <link rel="stylesheet" href="{{url('quickadmin/bootstrap/dist/css/bootstrap.css')}}">
+    <!-- Bootstrap 4.0-->
+    <link rel="stylesheet" href="{{asset('ap/plugins/bootstrap/dist/css/bootstrap.css')}}">
 
     <!-- Bootstrap extend-->
-    <link rel="stylesheet" href="{{asset('css/bootstrap-extend.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/bootstrap-extend.css')}}">
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('assets/vendor_components/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/plugins/select2/dist/css/select2.min.css')}}">
 
     <!-- toast CSS -->
-    <link href="{{asset('assets/vendor_components/jquery-toast-plugin-master/src/jquery.toast.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('ap/plugins/jquery-toast-plugin-master/src/jquery.toast.css')}}">
 
     <!-- theme style -->
-    <link rel="stylesheet" href="{{asset('css/master_style.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/master_style.css')}}">
 
     <!-- Superieur Admin skins -->
-    <link rel="stylesheet" href="{{asset('css/skins/_all-skins.css')}}">
-
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="{{asset('assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
-
-    <!-- Morris charts -->
-    <link rel="stylesheet" href="{{asset('assets/vendor_components/morris.js/morris.css')}}">
-
-    <!-- Data Table-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor_components/datatable/datatables.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('ap/css/skins/_all-skins.css')}}">
 
     <!-- Font Yekan -->
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-yekan/css/fontiran.css')}}"/>
+    <link rel="stylesheet" href="{{asset('ap/plugins/font-yekan/css/fontiran.css')}}" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,16 +46,16 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{route('home')}}" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo -->
             <div class="logo-mini">
-                <span class="light-logo"><img src="{{asset('images/favicon.png')}}" alt="logo"></span>
-                <span class="dark-logo"><img src="{{asset('images/favicon.png')}}" alt="logo"></span>
+                <span class="light-logo"><img src="@yield('mini-light-logo')" alt="logo"></span>
+                <span class="dark-logo"><img src="@yield('mini-dark-logo')" alt="logo"></span>
             </div>
             <!-- logo-->
             <div class="logo-lg">
-                <span class="light-logo"><img src="{{asset('images/logo.png')}}" alt="logo"></span>
-                <span class="dark-logo"><img src="{{asset('images/logo.png')}}" alt="logo"></span>
+                <span class="light-logo"><img src="@yield('dark-logo')" alt="logo"></span>
+                <span class="dark-logo"><img src="@yield('dark-logo')" alt="logo"></span>
             </div>
         </a>
         <!-- Header Navbar -->
@@ -88,7 +79,7 @@
                     <!-- User Account-->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{asset('images/avatar/7.jpg')}}" class="user-image rounded-circle"
+                            <img src="@yield('user-image')" class="user-image rounded-circle"
                                  alt="User Image">
                         </a>
                         {{--<ul class="dropdown-menu animated flipInY">
@@ -443,6 +434,7 @@
 
             <!-- sidebar menu-->
             <ul class="sidebar-menu" data-widget="tree">
+                @stack('sidebar')
                 {{--<li class="user-profile treeview">
                     <a href="index.html">
                         <img src="{{asset('images/avatar/7.jpg')}}" alt="user">
@@ -464,31 +456,7 @@
                 </li>--}}
                 {{--                <li class="header nav-small-cap"><i class="mdi mdi-drag-horizontal mr-5"></i>گزارش ها</li>--}}
                 {{--                <li class="header nav-small-cap active"><i class="mdi mdi-drag-horizontal mr-5"></i>گزارش ها</li>--}}
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-area-chart"></i>
 
-                        <span>نمودارها</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="{{route('home')}}"><i class="fa fa-bar-chart"></i>نمودار فروش محصول
-                                /
-                                منطقه</a>
-                        </li>
-                        {{--<li><a href="index-2.html"><i class="mdi mdi-toggle-switch-off"></i>e-Commerce Dashboard</a>
-                        </li>
-                        <li><a href="index-3.html"><i class="mdi mdi-toggle-switch-off"></i>Cryptocurrency</a></li>
-                        <li><a href="index-4.html"><i class="mdi mdi-toggle-switch-off"></i>Analytics</a></li>
-                        <li><a href="index-5.html"><i class="mdi mdi-toggle-switch-off"></i>Hospital</a></li>
-                        <li><a href="index-6.html"><i class="mdi mdi-toggle-switch-off"></i>Support System</a></li>
-                        <li><a href="index-7.html"><i class="mdi mdi-toggle-switch-off"></i>Sales Report</a></li>
-                        <li><a href="index-8.html"><i class="mdi mdi-toggle-switch-off"></i>Music</a></li>
-                        <li><a href="index-9.html"><i class="mdi mdi-toggle-switch-off"></i>Material</a></li>--}}
-                    </ul>
-                </li>
                 {{--
                 <li class="treeview">
                     <a href="#">
@@ -1012,6 +980,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
+        @yield('footer')
         {{--<div class="pull-right d-none d-sm-inline-block">
             <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
                 <li class="nav-item">
@@ -1022,11 +991,10 @@
                 </li>
             </ul>
         </div>--}}
-        &copy; 2020 <a href="https://besharatdev.ir/">Shortcut</a> تمامی حقوق محفوظ است.
     </footer>
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-light">
+    {{--<aside class="control-sidebar control-sidebar-light">
 
         <div class="rpanel-title"><span class="btn pull-right"><i class="ion ion-close"
                                                                   data-toggle="control-sidebar"></i></span></div>
@@ -1207,7 +1175,7 @@
             </div>
             <!-- /.tab-pane -->
         </div>
-    </aside>
+    </aside>--}}
     <!-- /.control-sidebar -->
 
     <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
@@ -1218,62 +1186,42 @@
 
 
 <!-- jQuery 3 -->
-<script src="{{asset('assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
 
 <!-- jQuery UI 1.11.4 -->
-<script src="{{asset('assets/vendor_components/jquery-ui/jquery-ui.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-ui/jquery-ui.js')}}"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 
-<!-- popper -->
-<script src="{{asset('assets/vendor_components/popper/dist/popper.min.js')}}"></script>
-
-<!-- date-range-picker -->
-<script src="{{asset('assets/vendor_components/moment/min/moment.min.js')}}"></script>
-<script src="{{asset('assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-
 <!-- Bootstrap 4.0-->
-<script src="{{asset('assets/vendor_components/bootstrap/dist/js/bootstrap.js')}}"></script>
+<script src="{{asset('ap/plugins/bootstrap/dist/js/bootstrap.js')}}"></script>
 
 <!-- Select2 -->
-<script src="{{asset('assets/vendor_components/select2/dist/js/select2.full.js')}}"></script>
+<script src="{{asset('ap/plugins/select2/dist/js/select2.full.js')}}"></script>
 
 <!-- Loading overlay -->
-<script src="{{asset('assets/vendor_components/loadingoverlay.min.js')}}"></script>
-
-<!-- ChartJS -->
-<script src="{{asset('assets/vendor_components/chart.js-master/Chart.min.js')}}"></script>
+<script src="{{asset('ap/plugins/loading-overlay/loadingoverlay.min.js')}}"></script>
 
 <!-- Slimscroll -->
-<script src="{{asset('assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
-
-<!-- FastClick -->
-<script src="{{asset('assets/vendor_components/fastclick/lib/fastclick.js')}}"></script>
-
-<!-- Morris.js charts -->
-<script src="{{asset('assets/vendor_components/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('assets/vendor_components/morris.js/morris.min.js')}}"></script>
-
-<!-- This is data table -->
-<script src="{{asset('assets/vendor_components/datatable/datatables.min.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
 
 <!-- Superieur Admin App -->
-<script src="{{asset('js/template.js')}}"></script>
+<script src="{{asset('ap/js/template.js')}}"></script>
 
 <!-- Superieur Admin dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('js/pages/dashboard.js')}}"></script>
+<script src="{{asset('ap/js/pages/dashboard.js')}}"></script>
 
 <!-- Superieur Admin for demo purposes -->
-<script src="{{asset('js/demo.js')}}"></script>
+<script src="{{asset('ap/js/demo.js')}}"></script>
 
 <!-- toast -->
-<script src="{{asset('assets/vendor_components/jquery-toast-plugin-master/src/jquery.toast.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-toast-plugin-master/src/jquery.toast.js')}}"></script>
 
 <!-- axios -->
-<script src="{{asset('js/axios.min.js')}}"></script>
+<script src="{{asset('ap/js/axios.min.js')}}"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
