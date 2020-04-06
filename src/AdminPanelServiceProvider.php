@@ -1,6 +1,6 @@
 <?php
 
-namespace Alireza\AdminPanel;
+namespace Alirezab\AdminPanel;
 
 use Illuminate\Support\ServiceProvider;
 

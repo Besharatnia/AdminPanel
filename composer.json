@@ -18,13 +18,13 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Alireza\\AdminPanel\\": "src/"
+            "Alirezab\\AdminPanel\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Alireza\\AdminPanel\\AdminPanelServiceProvider"
+                "Alirezab\\AdminPanel\\AdminPanelServiceProvider"
             ]
         }
     }
