@@ -1,7 +1,6 @@
 {
     "name": "alirezab/admin-panel",
     "description": "A nice Admin Panel with RTL support For Laravel",
-    "type": "project",
     "license": "MIT",
     "authors": [
         {
