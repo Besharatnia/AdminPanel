@@ -15,7 +15,6 @@
         "laravel admin panel"
     ],
     "require": {},
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Alirezab\\AdminPanel\\": "src/"
