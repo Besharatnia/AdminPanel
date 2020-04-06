@@ -9,13 +9,14 @@ class AdminPanelServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/AdminPanel'),
-        ]);
-        $this->publishes([
             __DIR__.'/assets' => public_path('vendor/AdminPanel'),
         ], 'public');
-        $this->loadViewsFrom(__DIR__ . '/views', 'AdminPanel');
 
+
+        $this->loadViewsFrom(__DIR__.'/views', 'AdminPanel');
+        $this->publishes([
+            __DIR__.'/views' => resource_path('views/vendor/AdminPanel'),
+        ]);
     }
 
     public function register()
