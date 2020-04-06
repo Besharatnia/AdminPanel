@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{asset('images/favicon.png')}}">
 
-    <title>پخش کوثر | ورود</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap 4.0-->
     <link rel="stylesheet" href="{{asset('assets/vendor_components/bootstrap/dist/css/bootstrap.min.css')}}">
