@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{asset('ap/plugins/select2/dist/css/select2.min.css')}}">
 
     <!-- toast CSS -->
-    <link rel="stylesheet" href="{{asset('ap/plugins/jquery-toast-plugin-master/src/jquery.toast.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/plugins/jquery-toast-plugin-master/dist/jquery.toast.min.css')}}">
 
     <!-- theme style -->
     <link rel="stylesheet" href="{{asset('ap/css/master_style.css')}}">
@@ -1218,7 +1218,7 @@
 <script src="{{asset('ap/js/demo.js')}}"></script>
 
 <!-- toast -->
-<script src="{{asset('ap/plugins/jquery-toast-plugin-master/src/jquery.toast.js')}}"></script>
+<script src="{{asset('ap/plugins/jquery-toast-plugin-master/dist/jquery.toast.min.js')}}"></script>
 
 <!-- axios -->
 <script src="{{asset('ap/js/axios.min.js')}}"></script>

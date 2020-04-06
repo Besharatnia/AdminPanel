@@ -49,16 +49,17 @@ import Dark Styles
 /*******************
 import icon and fonts Styles
 *******************/
-@import url(../../assets/vendor_components/font-awesome/css/font-awesome.css);
-@import url(../../assets/vendor_components/Ionicons/css/ionicons.css);
-@import url(../../assets/vendor_components/themify-icons/themify-icons.css);
-@import url(../../assets/vendor_components/linea-icons/linea.css);
-@import url(../../assets/vendor_components/glyphicons/glyphicon.css);
-@import url(../../assets/vendor_components/flag-icon/css/flag-icon.css);
-@import url(../../assets/vendor_components/material-design-iconic-font/css/materialdesignicons.css);
-@import url(../../assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css);
-@import url(../../assets/vendor_components/cryptocoins-master/webfont/cryptocoins.css);
-@import url(../../assets/vendor_components/animate/animate.css);
+@import url(../plugins/font-awesome/css/all.min.css);
+@import url(../plugins/font-awesome/css/light.min.css);
+/*@import url(../../assets/vendor_components/Ionicons/css/ionicons.css);*/
+/*@import url(../../assets/vendor_components/themify-icons/themify-icons.css);*/
+/*@import url(../../assets/vendor_components/linea-icons/linea.css);*/
+/*@import url(../../assets/vendor_components/glyphicons/glyphicon.css);*/
+/*@import url(../../assets/vendor_components/flag-icon/css/flag-icon.css);*/
+/*@import url(../../assets/vendor_components/material-design-iconic-font/css/materialdesignicons.css);*/
+/*@import url(../../assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css);*/
+/*@import url(../../assets/vendor_components/cryptocoins-master/webfont/cryptocoins.css);*/
+@import url(../plugins/animate/animate.css);
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i');
 
 /*------------------------------------------------------------------
