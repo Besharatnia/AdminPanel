@@ -1,0 +1,32 @@
+{
+    "name": "alireza/admin-panel",
+    "description": "A nice Admin Panel with RTL support For Laravel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alireza",
+            "email": "poorhasan@outlook.com"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "admin",
+        "laravel admin",
+        "laravel admin panel"
+    ],
+    "require": {},
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Alireza\\AdminPanel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alireza\\AdminPanel\\AdminPanelServiceProvider"
+            ]
+        }
+    }
+}
