@@ -34,7 +34,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition bg-img rtl" style="background-image: url({{asset('images/gallery/full/splash.jpg')}})"
+<body class="hold-transition bg-img rtl" style="background-image: url(@yield('background'));background-position: bottom"
       data-overlay="4">
 
 <div class="container h-p100">
@@ -64,47 +64,7 @@
                 </div>
                 <div class="col-lg-5 col-md-5 col-12">
                     <div class="p-40 bg-white content-bottom h-p100">
-                        <form method="POST" action="{{ route('login') }}" class="form-element">
-                            @csrf
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-info border-info"><i
-                                                class="ti-user"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control pl-15" placeholder="نام کاربری" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-info border-info"><i
-                                                class="ti-lock"></i></span>
-                                    </div>
-                                    <input type="password" class="form-control pl-15" placeholder="رمز عبور" name="password">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="basic_checkbox_1">
-                                        <label for="basic_checkbox_1">به خاطر بسپار</label>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                                {{--<div class="col-6">
-                                    <div class="fog-pwd text-right">
-                                        <a href="javascript:void(0)"><i class="ion ion-locked"></i> Forgot pwd?</a><br>
-                                    </div>
-                                </div>--}}
-                                <!-- /.col -->
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-block margin-top-10">ورود</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </form>
-
+                        @yield('form')
                         {{--<div class="text-center">
                             <p class="mt-15 mb-0">Don't have an account? <a href="auth_register.html"
                                                                             class="text-info ml-5">Sign Up</a></p>

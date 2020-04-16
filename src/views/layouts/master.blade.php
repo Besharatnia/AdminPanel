@@ -10,16 +10,11 @@
 
     <title>@yield('title')</title>
 
-@stack('head')
-
     <!-- Bootstrap 4.0-->
     <link rel="stylesheet" href="{{asset('ap/plugins/bootstrap/dist/css/bootstrap.css')}}">
 
     <!-- Bootstrap extend-->
     <link rel="stylesheet" href="{{asset('ap/css/bootstrap-extend.css')}}">
-
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('ap/plugins/select2/dist/css/select2.min.css')}}">
 
     <!-- toast CSS -->
     <link rel="stylesheet" href="{{asset('ap/plugins/jquery-toast-plugin-master/dist/jquery.toast.min.css')}}">
@@ -32,7 +27,7 @@
 
     <!-- Font Yekan -->
     <link rel="stylesheet" href="{{asset('ap/plugins/font-yekan/css/fontiran.css')}}" type="text/css"/>
-
+@stack('head')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +36,7 @@
     <![endif]-->
 </head>
 
-<body class="hold-transition skin-primary sidebar-mini rtl sidebar-collapse">
+<body class="hold-transition @yield('skin','skin-primary') sidebar-mini rtl sidebar-collapse">
 <div class="wrapper">
 
     <header class="main-header">
@@ -54,7 +49,7 @@
             </div>
             <!-- logo-->
             <div class="logo-lg">
-                <span class="light-logo"><img src="@yield('dark-logo')" alt="logo"></span>
+                <span class="light-logo"><img src="@yield('light-logo')" alt="logo"></span>
                 <span class="dark-logo"><img src="@yield('dark-logo')" alt="logo"></span>
             </div>
         </a>
@@ -79,6 +74,7 @@
                     <!-- User Account-->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>@yield('user-name')</span>
                             <img src="@yield('user-image')" class="user-image rounded-circle"
                                  alt="User Image">
                         </a>
@@ -1199,9 +1195,6 @@
 <!-- Bootstrap 4.0-->
 <script src="{{asset('ap/plugins/bootstrap/dist/js/bootstrap.js')}}"></script>
 
-<!-- Select2 -->
-<script src="{{asset('ap/plugins/select2/dist/js/select2.full.js')}}"></script>
-
 <!-- Loading overlay -->
 <script src="{{asset('ap/plugins/loading-overlay/loadingoverlay.min.js')}}"></script>
 
@@ -1215,7 +1208,7 @@
 <script src="{{asset('ap/js/pages/dashboard.js')}}"></script>
 
 <!-- Superieur Admin for demo purposes -->
-<script src="{{asset('ap/js/demo.js')}}"></script>
+{{--<script src="{{asset('ap/js/demo.js')}}"></script>--}}
 
 <!-- toast -->
 <script src="{{asset('ap/plugins/jquery-toast-plugin-master/dist/jquery.toast.min.js')}}"></script>
