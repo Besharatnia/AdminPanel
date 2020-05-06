@@ -40,14 +40,14 @@ $(function () {
 
 
 // table
-	$('#invoice-list').DataTable({
+	/*$('#invoice-list').DataTable({
 	  'paging'      : true,
 	  // 'lengthChange': false,
 	  // 'searching'   : false,
 	  'ordering'    : true,
 	  'info'        : true,
 	  'autoWidth'   : true,
-	});
+	});*/
 
 
 

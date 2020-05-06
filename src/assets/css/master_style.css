@@ -49,8 +49,9 @@ import Dark Styles
 /*******************
 import icon and fonts Styles
 *******************/
+@import url(../plugins/font-awesome/css/fontawesome.min.css);
 @import url(../plugins/font-awesome/css/all.min.css);
-@import url(../plugins/font-awesome/css/light.min.css);
+/*@import url(../plugins/font-awesome/css/solid.min.css);*/
 /*@import url(../../assets/vendor_components/Ionicons/css/ionicons.css);*/
 /*@import url(../../assets/vendor_components/themify-icons/themify-icons.css);*/
 /*@import url(../../assets/vendor_components/linea-icons/linea.css);*/
