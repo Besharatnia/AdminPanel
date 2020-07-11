@@ -78,6 +78,7 @@
                             <img src="@yield('user-image')" class="user-image rounded-circle"
                                  alt="User Image">
                         </a>
+                        @yield('user-drop-down')
                         {{--<ul class="dropdown-menu animated flipInY">
                             <!-- User image -->
                             <li class="user-header bg-img"
@@ -1219,6 +1220,17 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <script>
+    var persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
+        arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
+        fixPersianNumbers = function (str) {
+            if (typeof str === 'string') {
+                for (var i = 0; i < 10; i++) {
+                    str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+                }
+            }
+            return str;
+        };
+
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -1227,12 +1239,39 @@
         return str.replace(new RegExp(',', 'g'), '');
     }
 
-    $("input").keyup(function () {
-        $(this).val(numberWithCommas(removeComma($(this).val())));
+    $(document).on("keyup", "input", function () {
+        if ($(this).attr('type') != "number" && $(this).attr('type') != "checkbox" && $(this).attr('type') != "search" &&
+            $(this).attr('type') != "file" && $(this).attr('type') != "hidden" && $(this).data('comma') != false && !$(this).hasClass('header_filter')) {
+            $(this).val(numberWithCommas(removeComma($(this).val())));
+            setInputFilter($(this), function (value) {
+                return /^\d*\.?\d*$/.test(value);
+            });
+        }
+    });
+    $(document).on("click", "input", function () {
+        if ($(this).data('comma') != false)
+            $(this).select();
     });
     $(document).find('input').each(function () {
         $(this).keyup();
     });
+
+    function setInputFilter(textbox, inputFilter) {
+        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+            textbox.on(event, function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        });
+    }
 </script>
 @stack('script')
 
