@@ -8,7 +8,6 @@ class AdminPanelServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-//        $this->loadViewsFrom(__DIR__ . '/views', 'ap');
         $this->publishes([
             __DIR__ . '/assets' => base_path('public/ap'),
             __DIR__ . '/views' => resource_path('views/ap'),
