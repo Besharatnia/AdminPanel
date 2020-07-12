@@ -375,7 +375,7 @@ Project:	Superieur Admin - Responsive Admin Template
 }
 
 .rtl .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
-    left: 5%;
+    left: 2%;
     right: auto;
 }
 
@@ -389,7 +389,7 @@ Project:	Superieur Admin - Responsive Admin Template
 }
 
 .rtl .navbar-nav > .user-menu > .dropdown-menu > li.user-header .user-name {
-    text-align: left;
+    text-align: right;
 }
 
 .rtl .navbar-nav > .user-menu > .dropdown-menu > .user-body a i {
@@ -600,7 +600,7 @@ Project:	Superieur Admin - Responsive Admin Template
 }
 
 .rtl .box-header > .box-tools, .rtl .box-header > .box-controls {
-    left: 1.5rem;
+    left: .8rem;
     right: auto
 }
 
@@ -616,7 +616,7 @@ Project:	Superieur Admin - Responsive Admin Template
 
 .rtl [type=checkbox] + label {
     padding-left: 0;
-    padding-right: 35px !important;
+    padding-right: 25px !important;
 }
 
 .rtl [type=checkbox] + label:before, .rtl [type=checkbox]:not(.filled-in) + label:after {
@@ -641,7 +641,7 @@ Project:	Superieur Admin - Responsive Admin Template
 
 .rtl [type=radio]:checked + label, .rtl [type=radio]:not(:checked) + label {
     padding-left: 0;
-    padding-right: 35px !important;
+    padding-right: 25px !important;
 }
 
 .rtl [type=radio] + label:after, .rtl [type=radio] + label:before {

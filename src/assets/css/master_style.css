@@ -39,7 +39,7 @@ Project:	Superieur Admin - Responsive Admin Template
 /*******************
 import RTL Styles
 *******************/
-@import url(master_style_rtl.css);
+@import url(master_style_rtl.css?v=1.5);
 
 /*******************
 import Dark Styles
@@ -1330,6 +1330,7 @@ a:active, a:focus, a:hover {
 
 .navbar-custom-menu .navbar-nav > li {
     height: 60px;
+    /*display: contents;*/
 }
 
 .navbar-custom-menu .navbar-nav li > a.dropdown-toggle, .navbar-custom-menu .navbar-nav > li:last-child > a, .navbar-custom-menu .navbar-nav > .search-box > a {
@@ -1338,6 +1339,7 @@ a:active, a:focus, a:hover {
     line-height: 60px;
     display: block;
     font-size: 1.5rem;
+    /*margin: auto;*/
 }
 
 .search-box .app-search {
@@ -1346,7 +1348,7 @@ a:active, a:focus, a:hover {
     display: block;
     z-index: 110;
     width: 100%;
-    top: -50px;
+    top: -46px;
     left: 0px;
 }
 
@@ -1363,7 +1365,7 @@ a:active, a:focus, a:hover {
 
 .search-box .app-search .srh-btn {
     position: absolute;
-    top: 9px;
+    top: 7px;
     cursor: pointer;
     background: #ffffff;
     width: 15px;
@@ -1693,6 +1695,13 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     width: 30px;
     height: 30px;
     margin-top: 0px;
+}
+
+.navbar-nav > .user-menu {
+    display: contents;
+}
+.navbar-nav > .user-menu > .dropdown-toggle {
+    margin: auto;
 }
 
 @media (max-width: 767px) {
@@ -2600,8 +2609,8 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     padding-left: 35px;
     cursor: pointer;
     display: inline-block;
-    height: 25px;
-    line-height: 25px;
+    height: 18px;
+    line-height: 18px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -2613,11 +2622,11 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     position: absolute;
     top: 0;
     left: 0;
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     z-index: 0;
-    border: 2px solid #5a5a5a;
-    border-radius: 1px;
+    border: 1.5px solid #5a5a5a;
+    border-radius: 3px;
     margin-top: 2px;
     -webkit-transition: .2s;
     -o-transition: .2s;
@@ -2654,12 +2663,12 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
 [type=checkbox]:checked + label:before {
     top: -4px;
     left: -5px;
-    width: 12px;
-    height: 22px;
-    border-top: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid #2962FF;
-    border-bottom: 2px solid #2962FF;
+    width: 8px;
+    height: 18px;
+    border-top: 1.5px solid transparent;
+    border-left: 1.5px solid transparent;
+    border-right: 1.5px solid #2962FF;
+    border-bottom: 1.5px solid #2962FF;
     -webkit-transform: rotate(40deg);
     -ms-transform: rotate(40deg);
     transform: rotate(40deg);
@@ -2671,8 +2680,8 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
 }
 
 [type=checkbox]:checked:disabled + label:before {
-    border-right: 2px solid rgba(0, 0, 0, .26);
-    border-bottom: 2px solid rgba(0, 0, 0, .26);
+    border-right: 1.5px solid rgba(0, 0, 0, .26);
+    border-bottom: 1.5px solid rgba(0, 0, 0, .26);
 }
 
 [type=checkbox]:indeterminate + label:before {
@@ -3642,7 +3651,7 @@ input[type="color"] {
 .box-header {
     color: #455a64;
     display: block;
-    padding: 1.5rem 2.2rem;
+    padding: .9rem .9rem;
     position: relative;
     border-bottom: 1px solid rgba(97, 106, 120, 0.07);
 }
@@ -3692,7 +3701,7 @@ input[type="color"] {
 .box-header > .box-tools, .box-header > .box-controls {
     position: absolute;
     right: 1.5rem;
-    top: 1.5rem;
+    top: .6rem;
 }
 
 .box-header > .box-tools [data-toggle=tooltip], .control {
@@ -3740,7 +3749,7 @@ input[type="color"] {
 }
 
 .box-body {
-    padding: 2.2rem 2.2rem;
+    padding: .9rem .9rem;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
 }
@@ -5115,6 +5124,10 @@ ul.panel-actions > li:first-child {
     .panel > .alert-dismissible {
         padding-right: 40px;
     }
+}
+
+.table-responsive {
+    overflow-y: initial;
 }
 
 .panel > .table,
@@ -6960,6 +6973,7 @@ ul.panel-actions > li:first-child {
     -webkit-box-direction: normal;
     flex-direction: column;
     border-radius: 0;
+    overflow-y: auto;
 }
 
 .modal-left .modal-dialog {
@@ -11287,7 +11301,6 @@ button.btn.dropdown-toggle::after, .wysihtml5-toolbar .btn.dropdown-toggle::afte
 }
 
 .btn-bold {
-    font-family: Roboto, sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 12px;
@@ -13666,7 +13679,7 @@ button.btn.dropdown-toggle::after, .wysihtml5-toolbar .btn.dropdown-toggle::afte
 /*data table*/
 @media screen and (max-width: 767px) {
     .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-        white-space: nowrap;
+        /*white-space: nowrap;*/
     }
 }
 
@@ -13756,15 +13769,16 @@ button.btn.dropdown-toggle::after, .wysihtml5-toolbar .btn.dropdown-toggle::afte
 
 .dt-buttons .dt-button {
     padding: 5px 15px;
-    border-radius: 0;
-    background: #2962FF;
-    color: #fff;
-    margin-right: 3px;
-    display: inline-block;
+    border-radius: 4px;
+    background: unset;
+    color: black;
+    border: 0;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 .dt-buttons .dt-button:hover {
-    background: #2f3d4a;
+    background: unset;
 }
 
 .dataTables_filter {
@@ -13824,7 +13838,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:active {
     outline: 0;
-    background-color: #67757c;
+    background: unset;
 }
 
 .dataTables_wrapper .dataTables_paginate .ellipsis {
@@ -14183,6 +14197,7 @@ tfoot input {
 .modal-footer {
     border-top-color: #f4f4f4;
     display: inline-block;
+    padding: 10px 20px 10px;
 }
 
 .modal-primary .modal-footer, .modal-primary .modal-header {
@@ -15542,7 +15557,7 @@ tfoot input {
 .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
     border: 1px solid #d2d6de;
     border-radius: 0;
-    padding: 6px 12px;
+    padding: 0px 12px;
     height: 34px;
 }
 
@@ -15641,10 +15656,15 @@ tfoot input {
 
 .select2-container .select2-selection--single .select2-selection__rendered {
     padding-right: 10px;
+    margin: auto;
 }
 
 .datepicker .datepicker-switch:hover, .datepicker .next:hover, .datepicker .prev:hover, .datepicker tfoot tr th:hover {
     background: rgba(0, 0, 0, .15) !important;
+}
+
+.DTFC_LeftBodyLiner table {
+    margin: 0 !important;
 }
 
 .box .datepicker-inline .datepicker-days td:hover, .box .datepicker-inline .datepicker-days > table td:hover, .box .datepicker-inline td:hover, .box .datepicker-inline > table td:hover {
@@ -18136,4 +18156,47 @@ hr {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+    padding-left: 30px;
+    padding-right: 4px !important;
+    text-align: center;
+}
+
+table.dataTable.compact thead th {
+    padding: 4px 0 4px 4px !important;
+    text-align: center;
+}
+
+table.dataTable.compact thead th > .header_filter {
+    padding-right: 4px;
+    /*width: 50px;*/
+}
+
+table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+    left: 1em;
+    top: calc(10%) !important;
+    bottom: unset !important;
+    content: "\2191";
+    right: unset !important;
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+    left: 0.5em;
+    top: calc(10%) !important;
+    bottom: unset !important;
+    content: "\2193";
+    right: unset !important;
+}
+
+.number_helper_text {
+    position: fixed;
+    background: #FFC107;
+    color: black;
+    left: 10px;
+    bottom: 10px;
+    z-index: 100000;
+    padding: 5px 10px;
+    display: none;
 }
