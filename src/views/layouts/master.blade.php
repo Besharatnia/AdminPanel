@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="@yield('favicon')">
 
     <title>@yield('title')</title>
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('ap/plugins/jquery-toast-plugin-master/dist/jquery.toast.min.css')}}">
 
     <!-- theme style -->
-    <link rel="stylesheet" href="{{asset('ap/css/master_style.css')}}">
+    <link rel="stylesheet" href="{{asset('ap/css/master_style.css')}}?v=@yield('css-version')">
 
     <!-- Superieur Admin skins -->
     <link rel="stylesheet" href="{{asset('ap/css/skins/_all-skins.css')}}">
@@ -64,13 +65,14 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
-                    <li class="search-box">
+                    @yield('search_box')
+                    {{--<li class="search-box">
                         <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
                         <form class="app-search" style="display: none;">
                             <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
                                 class="srh-btn"><i class="ti-close"></i></a>
                         </form>
-                    </li>
+                    </li>--}}
                     <!-- User Account-->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -112,7 +114,7 @@
                             </li>
                         </ul>--}}
                     </li>
-
+                    @stack('header_dropdown')
                     {{--<!-- Messages -->
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -976,6 +978,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    @yield('after_content')
     <footer class="main-footer">
         @yield('footer')
         {{--<div class="pull-right d-none d-sm-inline-block">
@@ -1240,8 +1243,7 @@
     }
 
     $(document).on("keyup", "input", function () {
-        if ($(this).attr('type') != "number" && $(this).attr('type') != "checkbox" && $(this).attr('type') != "search" &&
-            $(this).attr('type') != "file" && $(this).attr('type') != "hidden" && $(this).data('comma') != false && !$(this).hasClass('header_filter')) {
+        if ($(this).hasClass('comma')) {
             $(this).val(numberWithCommas(removeComma($(this).val())));
             setInputFilter($(this), function (value) {
                 return /^\d*\.?\d*$/.test(value);

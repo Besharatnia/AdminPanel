@@ -963,9 +963,9 @@ throw new Error('template requires jQuery')
     if (event) event.preventDefault()
     Plugin.call($(this), 'toggle')
   })
-  
+
   // Slim scrolling
-  
+
   $('.inner-content-div').slimScroll({
     height: '200'
   });
@@ -973,18 +973,18 @@ throw new Error('template requires jQuery')
   $('.sm-scrol').slimScroll({
     height: '250'
   });
-	
+
   $('.direct-chat-messages').slimScroll({
     height: '310'
   });
 
-  
+
   $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {
         $(".app-search").toggle(200);
     });
-	
-	
-	
+
+
+
   // Close
     //
     $(document).on('click', '.box-btn-close', function() {
@@ -1021,33 +1021,33 @@ throw new Error('template requires jQuery')
     $(document).on('click', '.box-btn-fullscreen', function(){
       $(this).parents('.box').toggleClass('box-fullscreen').removeClass('box-maximize');
     });
-	
-		
+
+
 		// Disable demonstrative links!
     //
     $(document).on('click', 'a[href="#"]', function(e){
       e.preventDefault();
     });
-	
-	
+
+
     // This is for the innerleft sidebar
     $(".open-left-block").on('click', function() {
         $('.left-block').toggleClass('open-panel');
         $('.open-left-block').toggleClass('mdi-menu');
     });
-	
-	
+
+
     // Upload
     //
     $(document).on('click', '.file-browser', function() {
       var $browser = $(this);
       if ( $browser.hasClass('form-control') ) {
         setTimeout(function(){
-          $browser.closest('.file-group').find('[type="file"]').trigger('click');
+          $browser.find('.file-group').find('[type="file"]').trigger('click');
         },300);
       }
       else {
-        var file = $browser.closest('.file-group').find('[type="file"]');
+        var file = $browser.find('.file-group').find('[type="file"]');
         file.on( 'click', function(e) {
           e.stopPropagation();
         });
@@ -1074,9 +1074,9 @@ throw new Error('template requires jQuery')
       $(this).next('.custom-file-control').attr('data-input-value', filename);
     });
     $('.custom-file-control:not([data-input-value])').attr('data-input-value', 'Choose file...');
-	
-	
-	
-	
+
+
+
+
 }(jQuery) // End of use strict
 

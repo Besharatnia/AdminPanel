@@ -6,7 +6,7 @@ $options['pagination'] = isset($options['pagination']) ? $options['pagination'] 
 $order = $order ?? 'true';
 $options['length'] = isset($options['length']) ? $options['length'] : 'false';
 $rowPerPage = $rowPerPage ?? '100';
-$table_id = $table_id ?? rand(1, 1000);
+$table_id = $table_id ?? rand(1, 100000);
 ?>
 @stack('script')
 @push('head')
@@ -55,6 +55,11 @@ $table_id = $table_id ?? rand(1, 1000);
             bFilter: '{{$filter}}',
             serverSide: serverSide['{{$table_id}}'],
             processing: serverSide['{{$table_id}}'],
+            @if($first_hidden??false)
+            "columnDefs": [
+                {"visible": false, "targets": 0}
+            ],
+            @endif
             language: {
                 "decimal": ".",
                 "thousands": ","
@@ -84,7 +89,10 @@ $table_id = $table_id ?? rand(1, 1000);
         if (serverSide['{{$table_id}}'])
             option['{{$table_id}}'].ajax = {
                 url: '{{$url??''}}',
-                type: 'POST'
+                type: 'POST',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
+                }
             };
         if (typeof table == 'undefined')
             table = {};
