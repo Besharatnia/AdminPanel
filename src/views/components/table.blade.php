@@ -34,8 +34,13 @@ $table_id = $table_id ?? rand(1, 100000);
     <script src="{{asset('ap/plugins/datatables-bs4/js/dataTables.responsive.min.js')}}"></script>
     @if(@$excel)
         <script src="{{asset('ap/plugins/datatables-bs4/js/dataTables.buttons.min.js')}}"></script>
-        <script src="{{asset('ap/plugins/datatables-bs4/js/buttons.html5.min.js')}}"></script>
         <script src="{{asset('ap/plugins/datatables-bs4/js/jszip.min.js')}}"></script>
+        <script src="{{asset('ap/plugins/datatables-bs4/js/buttons.html5.min.js')}}"></script>
+    @endif
+    @if(@$pdf)
+        <script src="{{asset('ap/plugins/datatables-bs4/js/pdfmake.min.js')}}"></script>
+        <script src="{{asset('ap/plugins/datatables-bs4/js/vfs_fonts.js')}}"></script>
+        <script src="{{asset('ap/plugins/datatables-bs4/js/buttons.html5.min.js')}}"></script>
     @endif
     @component('ap.components.sweet_alert')
     @endcomponent
@@ -60,10 +65,6 @@ $table_id = $table_id ?? rand(1, 100000);
                 {"visible": false, "targets": 0}
             ],
             @endif
-            language: {
-                "decimal": ".",
-                "thousands": ","
-            },
             "fnDrawCallback": function () {
                 if ($("#table{{$table_id}}" + '_paginate .pagination li').length > 3) {
                     $("#table{{$table_id}}_paginate").css('opacity', 1);
@@ -71,12 +72,20 @@ $table_id = $table_id ?? rand(1, 100000);
                     $("#table{{$table_id}}_paginate").css('opacity', 0);
                 }
             },
-            @if(@$excel)
+
             buttons: [
-                {"extend": "excel", "text": "<i class='text-success fal fa-file-excel'></i>"}
+                    @if(@$excel)
+                {
+                    "extend": "excel", "text": "<i class='text-success fal fa-file-excel'></i>"
+                },
+                    @endif
+                    @if(@$pdf)
+                {
+                    "extend": "pdf", "text": "<i class='text-success fal fa-file-pdf'></i>"
+                },
+                @endif
             ],
-            @endif
-                @if(@$fixed)
+            @if(@$fixed)
             scrollX: true,
             scrollCollapse: true,
             fixedColumns: {
@@ -84,7 +93,25 @@ $table_id = $table_id ?? rand(1, 100000);
                 leftColumns: 1
             },
             @endif
-            order: {!! json_encode($sort??[]) !!}
+            order: {!! json_encode($sort??[]) !!},
+            language: {
+                "lengthMenu": "نمایش _MENU_ ردیف در صفحه",
+                "zeroRecords": "چیزی یافت نشد",
+                "info": "نمایش صفحه _PAGE_ از _PAGES_",
+                "infoEmpty": "چیزی یافت نشد",
+                "infoFiltered": "(فیلتر از _MAX_ کل records)",
+                "loadingRecords": "در حال بارگزاری...",
+                "processing": "در حال دریافت ...",
+                "search": "جستجو:",
+                "paginate": {
+                    "first": "اولین",
+                    "last": "آخرین",
+                    "next": "بعدی",
+                    "previous": "قبلی"
+                },
+                "decimal": ".",
+                "thousands": ","
+            }
         };
         if (serverSide['{{$table_id}}'])
             option['{{$table_id}}'].ajax = {
@@ -162,7 +189,11 @@ $table_id = $table_id ?? rand(1, 100000);
                         if ($(this).data('edit') != undefined) {
                             let editElem = $($.parseHTML($(this).data('edit')));
                             editElem.addClass('input');
-                            editElem.val($(this).html());
+                            try {
+                                editElem.val($(this).html());
+                            } catch (e) {
+
+                            }
                             if (editElem.is("select"))
                                 editElem.val(editElem.find('option:contains(' + $(this).text().trim() + ')').val());
                             $(this).html(editElem);
@@ -172,18 +203,28 @@ $table_id = $table_id ?? rand(1, 100000);
                 } else {
                     let data = {"id": tr.data('id')};
                     tr.LoadingOverlay("show");
+                    const formData = new FormData();
+                    formData.append('id', tr.data('id'))
                     tr.find('td').each(function () {
                         if ($(this).data('edit') != undefined) {
                             let ob = $(this).find('.input');
                             if (ob.is("select"))
                                 $(this).html(ob.find("option:selected").text());
+                            else {
+                                if (ob.attr('type') == "file")
+                                    $(this).html("");
+                                else
+                                    $(this).html(ob.val());
+                            }
+                            if (ob.attr('type') == "file")
+                                formData.append(ob.attr('name'), ob.prop('files')[0]);
                             else
-                                $(this).html(ob.val());
-                            data[ob.attr('name')] = ob.val();
+                                formData.append(ob.attr('name'), ob.val());
+                            // data[ob.attr('name')] = ob.val();
                         }
                     });
                     let button = $(this);
-                    axios.post('{{@$edit_route}}', data).then(function (response) {
+                    axios.post('{{@$edit_route}}', formData).then(function (response) {
                         if (response.data['ok'])
                             button.html('<i class="fal fa-pencil"></i>');
                         else {

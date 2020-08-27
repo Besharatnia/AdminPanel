@@ -37,7 +37,7 @@
     <![endif]-->
 </head>
 
-<body class="hold-transition @yield('skin','skin-primary') sidebar-mini rtl sidebar-collapse">
+<body class="hold-transition @yield('skin','skin-primary') sidebar-mini rtl">
 <div class="wrapper">
 
     <header class="main-header">
@@ -74,12 +74,12 @@
                         </form>
                     </li>--}}
                     <!-- User Account-->
-                    <li class="dropdown user user-menu">
+                    {{--<li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span>@yield('user-name')</span>
                             <img src="@yield('user-image')" class="user-image rounded-circle"
                                  alt="User Image">
-                        </a>
+                        </a>--}}
                         @yield('user-drop-down')
                         {{--<ul class="dropdown-menu animated flipInY">
                             <!-- User image -->
@@ -979,9 +979,9 @@
     </div>
     <!-- /.content-wrapper -->
     @yield('after_content')
-    <footer class="main-footer">
+    {{--<footer class="main-footer">
         @yield('footer')
-        {{--<div class="pull-right d-none d-sm-inline-block">
+        --}}{{--<div class="pull-right d-none d-sm-inline-block">
             <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)">FAQ</a>
@@ -990,8 +990,8 @@
                     <a class="nav-link" href="#">Purchase Now</a>
                 </li>
             </ul>
-        </div>--}}
-    </footer>
+        </div>--}}{{--
+    </footer>--}}
 
     <!-- Control Sidebar -->
 {{--<aside class="control-sidebar control-sidebar-light">
