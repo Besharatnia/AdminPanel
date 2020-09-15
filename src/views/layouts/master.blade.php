@@ -37,7 +37,7 @@
     <![endif]-->
 </head>
 
-<body class="hold-transition @yield('skin','skin-primary') sidebar-mini rtl">
+<body class="@yield('skin','skin-primary') hold-transition sidebar-collapse sidebar-mini rtl">
 <div class="wrapper">
 
     <header class="main-header">
@@ -50,7 +50,7 @@
             </div>
             <!-- logo-->
             <div class="logo-lg">
-                <span class="light-logo"><img src="@yield('light-logo')" alt="logo"></span>
+                <span class="light-logo"><img src="@yield('light-logo')" alt="logo" onerror="this.style.display='none'"></span>
                 <span class="dark-logo"><img src="@yield('dark-logo')" alt="logo"></span>
             </div>
         </a>
@@ -65,54 +65,54 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
-                    @yield('search_box')
-                    {{--<li class="search-box">
-                        <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
-                        <form class="app-search" style="display: none;">
-                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                class="srh-btn"><i class="ti-close"></i></a>
-                        </form>
-                    </li>--}}
-                    <!-- User Account-->
+                @yield('search_box')
+                {{--<li class="search-box">
+                    <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
+                    <form class="app-search" style="display: none;">
+                        <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
+                            class="srh-btn"><i class="ti-close"></i></a>
+                    </form>
+                </li>--}}
+                <!-- User Account-->
                     {{--<li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span>@yield('user-name')</span>
                             <img src="@yield('user-image')" class="user-image rounded-circle"
                                  alt="User Image">
                         </a>--}}
-                        @yield('user-drop-down')
-                        {{--<ul class="dropdown-menu animated flipInY">
-                            <!-- User image -->
-                            <li class="user-header bg-img"
-                                style="background-image: url({{asset('images/user-info.jpg')}})" data-overlay="3">
-                                <div class="flexbox align-self-center">
-                                    <img src="{{asset('images/avatar/7.jpg')}}" class="float-left rounded-circle"
-                                         alt="User Image">
-                                    <h4 class="user-name align-self-center">
-                                        <span>Samuel Brus</span>
-                                        <small>samuel@gmail.com</small>
-                                    </h4>
-                                </div>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> My
-                                    Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My
-                                    Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i>
-                                    Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i>
-                                    Logout</a>
-                                <div class="dropdown-divider"></div>
-                                <div class="p-10"><a href="javascript:void(0)"
-                                                     class="btn btn-sm btn-rounded btn-success">View Profile</a></div>
-                            </li>
-                        </ul>--}}
+                    @yield('user-drop-down')
+                    {{--<ul class="dropdown-menu animated flipInY">
+                        <!-- User image -->
+                        <li class="user-header bg-img"
+                            style="background-image: url({{asset('images/user-info.jpg')}})" data-overlay="3">
+                            <div class="flexbox align-self-center">
+                                <img src="{{asset('images/avatar/7.jpg')}}" class="float-left rounded-circle"
+                                     alt="User Image">
+                                <h4 class="user-name align-self-center">
+                                    <span>Samuel Brus</span>
+                                    <small>samuel@gmail.com</small>
+                                </h4>
+                            </div>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> My
+                                Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My
+                                Balance</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i>
+                                Inbox</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i>
+                                Account Setting</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i>
+                                Logout</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="p-10"><a href="javascript:void(0)"
+                                                 class="btn btn-sm btn-rounded btn-success">View Profile</a></div>
+                        </li>
+                    </ul>--}}
                     </li>
                     @stack('header_dropdown')
                     {{--<!-- Messages -->
@@ -978,22 +978,22 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @yield('after_content')
-    {{--<footer class="main-footer">
-        @yield('footer')
-        --}}{{--<div class="pull-right d-none d-sm-inline-block">
-            <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Purchase Now</a>
-                </li>
-            </ul>
-        </div>--}}{{--
-    </footer>--}}
+@yield('after_content')
+{{--<footer class="main-footer">
+    @yield('footer')
+    --}}{{--<div class="pull-right d-none d-sm-inline-block">
+        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Purchase Now</a>
+            </li>
+        </ul>
+    </div>--}}{{--
+</footer>--}}
 
-    <!-- Control Sidebar -->
+<!-- Control Sidebar -->
 {{--<aside class="control-sidebar control-sidebar-light">
 
     <div class="rpanel-title"><span class="btn pull-right"><i class="ion ion-close"
@@ -1223,16 +1223,17 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <script>
-    var persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
-        arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
-        fixPersianNumbers = function (str) {
-            if (typeof str === 'string') {
-                for (var i = 0; i < 10; i++) {
-                    str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
-                }
+    var persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g, /ي/g, /ك/g],
+        arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g, /ي/g, /ك/g],
+        english = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'ی', 'ک']
+    fixPersianNumbers = function (str) {
+        if (typeof str === 'string') {
+            for (var i = 0; i < english.length; i++) {
+                str = str.replace(persianNumbers[i], english[i]).replace(arabicNumbers[i], english[i]);
             }
-            return str;
-        };
+        }
+        return str;
+    };
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1245,9 +1246,9 @@
     $(document).on("keyup", "input", function () {
         if ($(this).hasClass('comma')) {
             $(this).val(numberWithCommas(removeComma($(this).val())));
-            setInputFilter($(this), function (value) {
-                return /^\d*\.?\d*$/.test(value);
-            });
+            // setInputFilter($(this), function (value) {
+            //     return /^\d*\.?\d*$/.test(value);
+            // });
         }
     });
     $(document).on("click", "input", function () {
@@ -1274,6 +1275,11 @@
             });
         });
     }
+    $(function (){
+       if($(document).width()<=766){
+           $('.sidebar-mini').removeClass('sidebar-collapse');
+       }
+    });
 </script>
 @stack('script')
 

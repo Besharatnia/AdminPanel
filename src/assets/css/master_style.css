@@ -808,7 +808,7 @@ a:active, a:focus, a:hover {
 }
 
 .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li.user-profile:hover > .treeview-menu {
-    top: 79px;
+    top: 74px;
 }
 
 .sidebar-menu .user-profile > a img {
@@ -18222,4 +18222,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
     z-index: 100000;
     padding: 5px 10px;
     display: none;
+}
+.jq-toast-single {
+     font-family: unset !important;
 }

@@ -82,6 +82,6 @@
 
 <!-- Bootstrap 4.0-->
 <script src="{{asset('ap/plugins/bootstrap/dist/js/bootstrap.js')}}"></script>
-
+@stack('script')
 </body>
 </html>

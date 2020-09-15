@@ -72,7 +72,6 @@ $table_id = $table_id ?? rand(1, 100000);
                     $("#table{{$table_id}}_paginate").css('opacity', 0);
                 }
             },
-
             buttons: [
                     @if(@$excel)
                 {
@@ -190,12 +189,17 @@ $table_id = $table_id ?? rand(1, 100000);
                             let editElem = $($.parseHTML($(this).data('edit')));
                             editElem.addClass('input');
                             try {
-                                editElem.val($(this).html());
+                                editElem.val($(this).html().replace(/<br>/g, "\n"));
                             } catch (e) {
 
                             }
-                            if (editElem.is("select"))
-                                editElem.val(editElem.find('option:contains(' + $(this).text().trim() + ')').val());
+                            if (editElem.is("select")) {
+                                var val = $(this).text().trim();
+                                if(val==""){
+                                    val = $(this).data('val');
+                                }
+                                editElem.val(editElem.find('option:contains(' + val + ')').val());
+                            }
                             $(this).html(editElem);
                         }
                     });
