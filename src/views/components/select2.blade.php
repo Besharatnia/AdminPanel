@@ -1,12 +1,13 @@
 <?php
 $data = $data ?? [];
 $id = $id ?? rand(0, 10000);
+$style = $style ?? "width: 100%;"
 ?>
 @push('head')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('ap/plugins/select2/dist/css/select2.min.css')}}">
 @endpush
-<select name="{{$name??""}}" class="select2" style="width: 100%;" id="select{{$id}}" {{$multiple??""}}>
+<select name="{{$name??""}}" class="select2 {{$class??""}}" style="{{$style}}" id="select{{$id}}" {{$multiple??""}}>
     {{$datas}}
 </select>
 @push('script')
@@ -21,6 +22,10 @@ $id = $id ?? rand(0, 10000);
         function init_select(obj) {
             obj.select2({
                 tags: "{{$tag??false}}",
+                @isset($parent)
+                dropdownParent: $('#{{$parent}}'),
+                @endisset
+                closeOnSelect: "{{$closeOnSelect??true}}",
                 matcher: function (params, data) {
                     if ($.trim(params.term) === '') {
                         return data;

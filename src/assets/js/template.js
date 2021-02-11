@@ -974,9 +974,9 @@ throw new Error('template requires jQuery')
     height: '250'
   });
 
-  $('.direct-chat-messages').slimScroll({
+  /*$('.direct-chat-messages').slimScroll({
     height: '310'
-  });
+  });*/
 
 
   $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {

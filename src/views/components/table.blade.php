@@ -10,12 +10,26 @@ $table_id = $table_id ?? rand(1, 100000);
 ?>
 @stack('script')
 @push('head')
+    <style>
+        @if($search=="false")
+        .dataTables_filter, .dataTables_info {
+            display: none;
+        }
+        @endif
+    </style>
     <!-- Data Table-->
     <link rel="stylesheet" href="{{asset('ap/plugins/datatables-bs4/css/jquery.dataTables.css?v=1')}}">
     <link rel="stylesheet" href="{{asset('ap/plugins/datatables-bs4/css/dataTables.bootstrap4.css?v=1.0')}}">
     <link rel="stylesheet" href="{{asset('ap/plugins/datatables-bs4/css/responsive.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('ap/plugins/datatables-bs4/css/fixedColumns.dataTables.min.css')}}">
 @endpush
+@if($edit_all??false)
+    <button type="button"
+            data-parent=2
+            class="btn btn-circle btn-kowsar btn-edit-row btn-xs margin-l-5">
+        <i
+            class="fal fa-pencil"></i></button>
+@endif
 <table id="table{{$table_id}}" class="table table-hover compact wrap {{@$style}}" data-page-size="10">
     <thead>
     <tr>
@@ -26,6 +40,13 @@ $table_id = $table_id ?? rand(1, 100000);
     {{$datas}}
     </tbody>
 </table>
+@push('after_content')
+    @component('ap.components.modal' , ['id'=>'edit_modal'.$table_id,'type'=>'','title'=>'ویرایش ردیف'])
+        @slot('body')
+
+        @endslot
+    @endcomponent
+@endpush
 @push('script')
     <!-- This is data table -->
     <script src="{{asset('ap/plugins/datatables-bs4/js/jquery.dataTables.js')}}"></script>
@@ -130,6 +151,7 @@ $table_id = $table_id ?? rand(1, 100000);
 
                 $('input', this).on('keyup change', function () {
                     let value = this.value.replace(/\ي/g, 'ی');
+                    value = value.replace(/\ك/g, 'ک');
                     if (table['{{$table_id}}'].column(i).search() !== value) {
                         table['{{$table_id}}']
                             .column(i)
@@ -180,22 +202,53 @@ $table_id = $table_id ?? rand(1, 100000);
 
         $.fn.dataTable.ext.errMode = 'none';
 
-        $(function () {
-            $(document).on('click', '.btn-edit-row', function () {
-                var tr = $(this).parents().eq(parseInt($(this).data('parent')) - 1);
-                if ($(this).data('edit') != true) {
+        function editRow(obj, popup = true, save = false) {
+            var tr = obj;
+            if (!save && tr.find('.btn-edit-row').data('edit') != true) {
+                if (popup) {
+                    $("#edit_modal{{$table_id}} .modal-body").empty();
+                    var index = 0;
                     tr.find('td').each(function () {
-                        if ($(this).data('edit') != undefined) {
+                        if ($(this).data('edit') != undefined && $(this).data('edit') != "") {
                             let editElem = $($.parseHTML($(this).data('edit')));
                             editElem.addClass('input');
                             try {
-                                editElem.val($(this).html().replace(/<br>/g, "\n"));
+                                editElem.val($(this).html().replace(/<br>/g, "\n").trim());
                             } catch (e) {
 
                             }
                             if (editElem.is("select")) {
                                 var val = $(this).text().trim();
-                                if(val==""){
+                                if (val == "") {
+                                    val = $(this).data('val');
+                                }
+                                editElem.val(editElem.find('option:contains(' + val + ')').val());
+                            } else {
+                                editElem.css('width', '100%');
+                            }
+                            editElem.data('td', index);
+                            $("#edit_modal{{$table_id}} .modal-body").append($(this).parents().eq(2).find('thead tr:eq(1) th:eq(' + index + ')').text() + "<br>");
+                            $("#edit_modal{{$table_id}} .modal-body").append(editElem);
+                            $("#edit_modal{{$table_id}} .modal-body").append("<br>");
+                            // $(this).html(editElem);
+                        }
+                        index++;
+                    });
+                    $("#edit_modal{{$table_id}}").modal('show');
+                    $("#edit_modal{{$table_id}}").data('id', tr.data('id'));
+                } else {
+                    tr.find('td').each(function () {
+                        if ($(this).data('edit') != undefined) {
+                            let editElem = $($.parseHTML($(this).data('edit')));
+                            editElem.addClass('input');
+                            try {
+                                editElem.val($(this).html().replace(/<br>/g, "\n").trim());
+                            } catch (e) {
+
+                            }
+                            if (editElem.is("select")) {
+                                var val = $(this).text().trim();
+                                if (val == "") {
                                     val = $(this).data('val');
                                 }
                                 editElem.val(editElem.find('option:contains(' + val + ')').val());
@@ -203,59 +256,118 @@ $table_id = $table_id ?? rand(1, 100000);
                             $(this).html(editElem);
                         }
                     });
-                    $(this).data('edit', true).html("ذخیره");
+                    tr.find('.btn-edit-row').data('edit', true).html("ذخیره");
+                }
+            } else {
+                const formData = new FormData();
+                let button = tr.find('.btn-edit-row');
+                if (popup) {
+                    $('#edit_modal{{$table_id}}').LoadingOverlay("show");
+                    formData.append('id', $('#edit_modal{{$table_id}}').data('id'))
+                    $('#edit_modal{{$table_id}} .modal-body').find('select,input,textarea').each(function () {
+                        let ob = $(this);
+                        var td = ob.data('td');
+                        if (ob.attr('type') == "checkbox"){
+                            td = ob.parent().data('td');
+                        }
+                        var td = $("tr[data-id=" + $('#edit_modal{{$table_id}}').data('id') + "] td:eq(" + td + ")");
+                        if (ob.is("select"))
+                            td.html(ob.find("option:selected").text());
+                        else {
+                            if (ob.attr('type') == "file")
+                                td.html("");
+                            else if (ob.attr('type') == "checkbox")
+                                td.html(ob.is(":checked") ? "بله" : "خیر");
+                            else
+                                td.html(ob.val());
+                        }
+                        if (ob.attr('type') == "file")
+                            formData.append(ob.attr('name'), ob.prop('files')[0]);
+                        else if (ob.attr('type') == "checkbox")
+                            formData.append(ob.attr('name'), ob.is(':checked'));
+                        else
+                            formData.append(ob.attr('name'), ob.val());
+                    });
+                    let button = $('#submitedit_modal{{$table_id}}');
                 } else {
-                    let data = {"id": tr.data('id')};
                     tr.LoadingOverlay("show");
-                    const formData = new FormData();
                     formData.append('id', tr.data('id'))
                     tr.find('td').each(function () {
-                        if ($(this).data('edit') != undefined) {
+                        if ($(this).data('edit') != undefined && $(this).data('edit') != "") {
                             let ob = $(this).find('.input');
+                            if(ob.find('input[type=checkbox]').length>0) ob = ob.find('input[type=checkbox]:first');
                             if (ob.is("select"))
                                 $(this).html(ob.find("option:selected").text());
                             else {
                                 if (ob.attr('type') == "file")
                                     $(this).html("");
+                                else if (ob.attr('type') == "checkbox")
+                                    $(this).html(ob.is(":checked") ? "بله" : "خیر");
                                 else
                                     $(this).html(ob.val());
                             }
                             if (ob.attr('type') == "file")
                                 formData.append(ob.attr('name'), ob.prop('files')[0]);
+                            else if (ob.attr('type') == "checkbox") {
+                                console.log(ob);
+                                formData.append(ob.attr('name'), ob.is(':checked'));
+                            }
                             else
                                 formData.append(ob.attr('name'), ob.val());
-                            // data[ob.attr('name')] = ob.val();
                         }
                     });
-                    let button = $(this);
-                    axios.post('{{@$edit_route}}', formData).then(function (response) {
-                        if (response.data['ok'])
-                            button.html('<i class="fal fa-pencil"></i>');
-                        else {
-                            button.html("خطا");
-                            $.toast({
-                                text: response.data['message'],
-                                position: 'bottom-left',
-                                loaderBg: '#bc0000',
-                                icon: 'error',
-                                hideAfter: 3500
-                            });
-                        }
-                    }).catch(function (error) {
-                        if (error.response && error.response.status == 403) {
-                            $.toast({
-                                text: "دسترسی غیر مجاز",
-                                position: 'bottom-left',
-                                loaderBg: '#bc0000',
-                                icon: 'error',
-                                hideAfter: 3500
-                            });
-                        }
-                    }).finally(function () {
-                        tr.LoadingOverlay("hide");
-                    });
-                    button.data('edit', false);
                 }
+
+                axios.post('{{@$edit_route}}', formData).then(function (response) {
+                    if (response.data['ok']) {
+                        if (popup) {
+                            $('#edit_modal{{$table_id}}').LoadingOverlay("hide");
+                            $('#edit_modal{{$table_id}}').modal('hide');
+                        } else
+                            button.html('<i class="fal fa-pencil"></i>');
+                    } else {
+                        if (!popup)
+                            button.html("خطا");
+                        $.toast({
+                            text: response.data['message'],
+                            position: 'bottom-left',
+                            loaderBg: '#bc0000',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                }).catch(function (error) {
+                    if (error.response && error.response.status == 403) {
+                        $.toast({
+                            text: "دسترسی غیر مجاز",
+                            position: 'bottom-left',
+                            loaderBg: '#bc0000',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                }).finally(function () {
+                    if (!popup)
+                        tr.LoadingOverlay("hide");
+                });
+                if (!popup)
+                    button.data('edit', false);
+            }
+        }
+
+        $("#submitedit_modal{{$table_id}}").click(function () {
+            editRow($(this), true, true);
+        });
+
+        $(function () {
+            $(document).on('click', '.btn-edit-row', function () {
+                var tr = $(this).parents().eq(parseInt($(this).data('parent')) - 1);
+                if (tr.find('tr').length == 0)
+                    editRow(tr, true);
+                else
+                    tr.find('tr').each(function () {
+                        editRow($(this), false);
+                    });
             });
             $(document).on('click', '.btn-remove-row', function () {
                 var tr = $(this).parents().eq(parseInt($(this).data('parent')) - 1);
@@ -298,13 +410,15 @@ $table_id = $table_id ?? rand(1, 100000);
                 });
             });
             $(document).on('click', '.btn-add-row', function () {
+                $("#edit_modal{{$table_id}} .modal-title").html('ردیف جدید');
                 let row = $('#table{{$table_id}}').find('tbody tr:first-child').clone();
                 row.find('td').each(function () {
                     if ($(this).data('edit') != undefined)
                         $(this).html("");
                 });
-                $('#table{{$table_id}}').find('tbody').append(row);
-                $('#table{{$table_id}}').find('tbody tr:last-child').removeAttr('data-id');
+                row.removeAttr('data-id')
+                $('#table{{$table_id}}').find('tbody').before(row);
+                <!--$('#table{$table_id}}').find('tbody tr:first-child');-->
                 row.find('.btn-edit-row').click();
             });
         });

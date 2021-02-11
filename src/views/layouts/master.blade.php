@@ -3,11 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="@yield('favicon')">
+    <link rel="apple-touch-icon" href="@yield('favicon')">
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="/imgs/logo2/144.png"/>
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="/imgs/logo2/144.png"/>
+    <link rel="apple-touch-icon" sizes="192x192"
+          href="/imgs/logo2/192.png"/>
+    <link rel="apple-touch-icon" sizes="384x384"
+          href="/imgs/logo2/144.png"/>
+    <link rel="apple-touch-icon" sizes="512x512"
+          href="/imgs/logo2/512.png"/>
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="/imgs/logo2/144.png"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+
 
     <title>@yield('title')</title>
 
@@ -978,22 +994,14 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@yield('after_content')
-{{--<footer class="main-footer">
-    @yield('footer')
-    --}}{{--<div class="pull-right d-none d-sm-inline-block">
-        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">FAQ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Purchase Now</a>
-            </li>
-        </ul>
-    </div>--}}{{--
-</footer>--}}
+    @stack('after_content')
+    <footer class="main-footer panel-footer-fixed">
+        @yield('footer')
+        <a target="_blank" href='https://shtp.ir'>ساخت و توسعه توسط تیم
+            <b style="color: dodgerblue;font-weight: 800">SHTP</b></a>
+    </footer>
 
-<!-- Control Sidebar -->
+    <!-- Control Sidebar -->
 {{--<aside class="control-sidebar control-sidebar-light">
 
     <div class="rpanel-title"><span class="btn pull-right"><i class="ion ion-close"
@@ -1206,7 +1214,7 @@
 <script src="{{asset('ap/plugins/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
 
 <!-- Superieur Admin App -->
-<script src="{{asset('ap/js/template.js')}}"></script>
+<script src="{{asset('ap/js/template.js')}}?v=1"></script>
 
 <!-- Superieur Admin dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('ap/js/pages/dashboard.js')}}"></script>
@@ -1275,10 +1283,17 @@
             });
         });
     }
-    $(function (){
-       if($(document).width()<=766){
-           $('.sidebar-mini').removeClass('sidebar-collapse');
-       }
+
+    $(function () {
+        if ($(document).width() <= 766) {
+            $('.sidebar-mini').removeClass('sidebar-collapse');
+        }
+
+        $('a').click(function () {
+            console.log($(this).attr('href'));
+            if ($(this).attr('href') != "" && $(this).attr('href') != "undefined" && $(this).attr('href') != "#" && !$(this).hasClass('view-cart')&& !$(this).hasClass('nav-link'))
+                $.LoadingOverlay('show');
+        });
     });
 </script>
 @stack('script')

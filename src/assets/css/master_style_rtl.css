@@ -1380,7 +1380,8 @@ Project:	Superieur Admin - Responsive Admin Template
 }
 
 .rtl .modal-header .close {
-    margin: -15px auto -15px -15px;
+    margin: auto 0;
+    padding: 5px;
 }
 
 .rtl .modal-footer > :not(:first-child) {
